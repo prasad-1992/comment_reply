@@ -33,19 +33,16 @@
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3 post">
-			<h2>Post title</h2>
-			<p>First Post of this App.</p>
-		</div>
+		
 
 		<!-- comments section -->
 		<div class="col-md-6 col-md-offset-3 comments-section">
-			<!-- comment form -->   
-			<form class="clearfix" action="#" method="post" id="comment_form">
-				<h4>Post a comment:</h4>
-				<textarea name="comment_text" id="comment_text" class="form-control" cols="30" rows="3"></textarea>
-				<button class="btn btn-primary btn-sm pull-right" id="submit_comment">Submit comment</button>
-			</form>
+			<div class="col-md-6 col-md-offset-3 post">
+				<h3>Post title:</h3>
+				<p>{{ tit }}</p>
+				<h3>Post:</h3>
+				<p>{{ po }}</p>
+			</div>
 
 			<!-- Display total number of comments on this post  -->
 			<h2><span id="comments_count">0</span> Comments</h2>
@@ -142,6 +139,7 @@ $(document).ready(function(){
 	});
 });
 </script>
+
 <!-- Bootstrap Javascript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

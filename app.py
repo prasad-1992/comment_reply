@@ -5,7 +5,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:3306/comment_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
+title = "My First Name"
+post = "Prasad"
 class user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
@@ -47,8 +48,7 @@ def login():
         
         login = user.query.filter_by(username=uname, password=passw).first()
         if login is not None:
-
-            return redirect(url_for("comment"))
+            return redirect(url_for("post"))
     return render_template("login.html")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -65,9 +65,23 @@ def register():
         return redirect(url_for("login"))
     return render_template("register.html")
 
-@app.route("/comment")
+@app.route("/post", methods=["GET", "POST"])
+def post():
+    if request.method == 'POST':
+        title = request.form['blog_title']
+        post = request.form['post_text']
+
+        return redirect(url_for("login"))
+    return render_template('post.html')
+
+@app.route("/comment", methods=["GET", "POST"])
 def comment():
-    return render_template('comment.html')
+    if request.method == 'POST':
+        title = request.form['blog_title']
+        post = request.form['post_text']
+
+        return render_template('comment.html',tit =title , po =post )
+    return render_template('post.html')
 
 if __name__ == '__main__':
     db.create_all()
