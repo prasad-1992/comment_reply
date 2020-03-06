@@ -28,15 +28,23 @@
 	    margin-left: 40px;
 	    display: none;}
     #comment_form { margin-top: 10px; }
+	.hide{
+  display:none;
+}
+.show{
+  display:block;
+}
 </style>    
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		
-
+	<!-- class="container">
+        <div class="row" style="margin-top: 40px">
+            <!-- <div class="col-sm-6"> -->
+                <form method="POST">
+<!-- class="container">
+	<!-- class="row">
 		<!-- comments section -->
-		<div class="col-md-6 col-md-offset-3 comments-section">
+		<!-- <div class="col-md-6 col-md-offset-3 comments-section"> -->
 			<div class="col-md-6 col-md-offset-3 post">
 				<h3>Post title:</h3>
 				<p>{{ tit }}</p>
@@ -46,7 +54,23 @@
 
 			<!-- Display total number of comments on this post  -->
 			<h2><span id="comments_count">0</span> Comments</h2>
+			<!-- <div class="col-md-6 col-md-offset-3 post">
+				<p>{{ blog_comment }}</p>
+			</div> -->
+			<!-- <input type="button" name="answer" value="Comment" onclick="onButtonClick()" /> -->
+			<input type="button" name="answer" value="Comment" onclick="onButtonClick()" />
+			<!-- <div class="hide" id="textInput"> -->
+			<textarea name="blog_comment" id="blog_comment" class="form-control" cols="30" rows="3"></textarea>
+			<!-- <textarea type="text" name="blog_comment" cols="30" rows="3"></textarea> -->
+			<button class="btn btn-primary btn-sm pull-right" id="submit_post">Submit Comment</button>				
+			<!-- </div> -->
+				</form>
+			</!-->
+		</!-->
+	</div>
+				
 			<hr>
+				
 			<!-- comments wrapper -->
 			<div id="comments-wrapper">
 				<div class="comment clearfix">
@@ -66,14 +90,14 @@
 									<a class="reply-btn" href="#">reply</a>
 								</div>
 							</div>
-						</div>
-					</div>
+					    </div>
+				</div>
 			</div>
 			<!-- // comments wrapper -->
-		</div>
+		</!-->
 		<!-- // comments section -->
-	</div>
-</div>
+	</!-->
+</!-->
 <!-- Javascripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -139,7 +163,14 @@ $(document).ready(function(){
 	});
 });
 </script>
-
+<script>
+function onButtonClick(){
+  document.getElementById('textInput').className="show";
+}
+function onreplyButtonClick(){
+  document.getElementById('textInput1').className="show";
+}
+</script>
 <!-- Bootstrap Javascript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

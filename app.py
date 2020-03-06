@@ -14,12 +14,12 @@ class user(db.Model):
     password = db.Column(db.String(80))
     created_at = db.Column(db.TIMESTAMP())
 
-class posts(db.Model):
+class post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer())
-    title = db.Column(db.String(120))
-    body = db.Column(db.Text(80))
-    created_at = db.Column(db.TIMESTAMP())
+    title = db.Column(db.String(11))
+    body = db.Column(db.Text(120))
+    craeted_at = db.Column(db.TIMESTAMP())
 
 class comments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -48,7 +48,7 @@ def login():
         
         login = user.query.filter_by(username=uname, password=passw).first()
         if login is not None:
-            return redirect(url_for("post"))
+            return redirect(url_for("posts"))
     return render_template("login.html")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -65,23 +65,30 @@ def register():
         return redirect(url_for("login"))
     return render_template("register.html")
 
-@app.route("/post", methods=["GET", "POST"])
-def post():
+@app.route("/posts", methods=["GET", "POST"])
+def posts():
     if request.method == 'POST':
         title = request.form['blog_title']
-        post = request.form['post_text']
+        body = request.form['post_text']
 
-        return redirect(url_for("login"))
-    return render_template('post.html')
+        blog_posts = post(title = title, body = body)
+        db.session.add(blog_posts)
+        db.session.commit()
+
+        return render_template('comment.html',tit =title , po =body)
+    return render_template('posts.html')
 
 @app.route("/comment", methods=["GET", "POST"])
 def comment():
     if request.method == 'POST':
-        title = request.form['blog_title']
-        post = request.form['post_text']
+        comment_body = request.form['blog_comment']
 
-        return render_template('comment.html',tit =title , po =post )
-    return render_template('post.html')
+        blog_comment = comments( comment_body = comment_body)
+        db.session.add(blog_comment)
+        db.session.commit()
+
+        return render_template('comment.html')
+    return render_template('comment.html')
 
 if __name__ == '__main__':
     db.create_all()
